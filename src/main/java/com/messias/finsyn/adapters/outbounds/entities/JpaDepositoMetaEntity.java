@@ -20,8 +20,11 @@ public class JpaDepositoMetaEntity {
     @ManyToOne
     @JoinColumn(name = "id_meta_financeira")
     private JpaMetaFinanceiraEntity metaFinanceira;
-    @ManyToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "id_transacao")
     private JpaTransacaoEntity transacao;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private JpaUsuarioEntity usuario;
 
 }

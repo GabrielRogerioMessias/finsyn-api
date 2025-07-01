@@ -25,4 +25,6 @@ public class JpaTransacaoEntity {
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private JpaCategoriaEntity categoria;
+    @OneToOne(mappedBy = "transacao")
+    private JpaDepositoMetaEntity deposito;
 }

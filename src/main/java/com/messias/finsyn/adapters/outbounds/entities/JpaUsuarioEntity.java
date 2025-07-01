@@ -27,4 +27,6 @@ public class JpaUsuarioEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_usuario")
     private TipoUsuario tipo;
+    @OneToMany(mappedBy = "usuario")
+    private List<JpaDepositoMetaEntity> depositosMetas;
 }
