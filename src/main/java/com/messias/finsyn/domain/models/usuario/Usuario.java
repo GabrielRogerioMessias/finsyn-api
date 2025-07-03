@@ -1,7 +1,6 @@
 package com.messias.finsyn.domain.models.usuario;
 
 import com.messias.finsyn.domain.models.categoria.Categoria;
-import com.messias.finsyn.domain.models.enums.TipoUsuario;
 import com.messias.finsyn.domain.models.meta_financeira.MetaFinanceira;
 import com.messias.finsyn.domain.models.transacao.Transacao;
 
@@ -17,18 +16,17 @@ public class Usuario {
     private List<Transacao> transacoes;
     private List<Categoria> categorias;
     private List<MetaFinanceira> metasFinanceiras;
-    private TipoUsuario tipo;
 
     public Usuario() {
     }
 
-    public Usuario(UUID id, String nome, String sobrenome, String email, String senha, TipoUsuario tipo) {
+    public Usuario(UUID id, String nome, String sobrenome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.senha = senha;
-        this.tipo = tipo;
+
     }
 
     public UUID getId() {
@@ -94,12 +92,5 @@ public class Usuario {
     public void setMetasFinanceiras(List<MetaFinanceira> metasFinanceiras) {
         this.metasFinanceiras = metasFinanceiras;
     }
-
-    public TipoUsuario getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo;
-    }
+    
 }
