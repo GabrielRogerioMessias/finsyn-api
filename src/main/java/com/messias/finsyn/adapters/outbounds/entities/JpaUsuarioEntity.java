@@ -11,7 +11,8 @@ import java.util.UUID;
 @Data
 public class JpaUsuarioEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
     private String nome;
     private String sobrenome;
