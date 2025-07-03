@@ -3,11 +3,11 @@ package com.messias.finsyn.adapters.outbounds.repositories;
 import com.messias.finsyn.adapters.outbounds.entities.JpaUsuarioEntity;
 import com.messias.finsyn.adapters.outbounds.entities.mappers.UsuarioMapper;
 import com.messias.finsyn.domain.models.usuario.Usuario;
-import com.messias.finsyn.domain.ports.out.UsuarioCadastroUseCase;
+import com.messias.finsyn.domain.ports.out.UsuarioRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UsuarioRepositoryImpl implements UsuarioCadastroUseCase {
+public class UsuarioRepositoryImpl implements UsuarioRepository {
     private final UsuarioMapper usuarioMapper;
     private final JpaUsuarioRepository jpaUsuarioRepository;
 
