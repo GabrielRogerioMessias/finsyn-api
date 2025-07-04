@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
     private final UsuarioUseCases usuarioCadastroUseCase;
 
@@ -19,7 +19,7 @@ public class UsuarioController {
         this.usuarioCadastroUseCase = usuarioCadastroUseCase;
     }
 
-    @PostMapping
+    @PostMapping(value = "/registrar")
     public ResponseEntity<Usuario> usuarioCadastroUseCase(@RequestBody UsuarioRegistrarDTO usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCadastroUseCase.cadastrar(usuario));
     }
