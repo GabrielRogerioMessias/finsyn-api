@@ -10,20 +10,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Service
 public class TokenService {
     @Value("${api.security.token.security}")
     private String secretKey;
 
-    public String generateToken(Usuario usuario) {
+    public Token generateToken(Usuario usuario) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretKey);
-            String token = JWT.create()
+            Token token = new Token();
+            token.setEmail(usuario.getEmail());
+            token.setAuthenticated(true);
+            token.setCreated(new Date());
+            token.setExpiration(Date.from(this.generateExpirationDate()));
+            token.setToken(JWT.create()
                     .withIssuer("finsyn-api")
-                    .withSubject(usuario.getEmail())
-                    .withExpiresAt(this.generateExpirationDate())
-                    .sign(algorithm);
+                    .withSubject(token.getEmail())
+                    .withExpiresAt(token.getExpiration())
+                    .sign(algorithm));
             return token;
         } catch (JWTCreationException e) {
             throw new RuntimeException();
