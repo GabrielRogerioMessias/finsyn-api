@@ -4,6 +4,8 @@ import com.messias.finsyn.adapters.inbounds.dtos.LoginDataDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRegistrarDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRespostaDTO;
 import com.messias.finsyn.adapters.inbounds.mappers.UsuarioDTOMapper;
+import com.messias.finsyn.adapters.outbounds.entities.JpaUsuarioEntity;
+import com.messias.finsyn.adapters.outbounds.entities.mappers.UsuarioMapper;
 import com.messias.finsyn.application.usecases.AuthUseCase;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.UsuarioRepository;
@@ -17,12 +19,11 @@ public class AuthServiceImpl implements AuthUseCase {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
-    private final UsuarioDTOMapper usuarioMapper;
 
-    public AuthServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, TokenService tokenService, UsuarioDTOMapper usuarioMapper) {
+
+    public AuthServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, TokenService tokenService) {
         this.passwordEncoder = passwordEncoder;
         this.tokenService = tokenService;
-        this.usuarioMapper = usuarioMapper;
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -36,9 +37,8 @@ public class AuthServiceImpl implements AuthUseCase {
     }
 
     @Override
-    public UsuarioRespostaDTO registrar(UsuarioRegistrarDTO registrar) {
-        Usuario usuario = usuarioMapper.dtoRegistrarToDomain(registrar);
-        usuario.setSenha(passwordEncoder.encode(registrar.getSenha()));
-        return usuarioMapper.dtoRespostaToDto(usuarioRepository.cadastrar(usuario));
+    public Usuario registrar(Usuario novoUsuario) {
+        novoUsuario.setSenha(passwordEncoder.encode(novoUsuario.getSenha()));
+        return usuarioRepository.cadastrar(novoUsuario);
     }
 }
