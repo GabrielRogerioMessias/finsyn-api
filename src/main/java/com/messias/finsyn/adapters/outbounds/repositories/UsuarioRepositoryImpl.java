@@ -22,4 +22,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         JpaUsuarioEntity jpaEntity = jpaUsuarioRepository.save(entidade);
         return usuarioMapper.jpaUsuarioToDominio(jpaEntity);
     }
+
+    @Override
+    public Usuario buscarPorEmail(String email) {
+        JpaUsuarioEntity jpaUsuario = jpaUsuarioRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("usuário não encontrado"));
+        return usuarioMapper.jpaUsuarioToDominio(jpaUsuario);
+    }
 }
