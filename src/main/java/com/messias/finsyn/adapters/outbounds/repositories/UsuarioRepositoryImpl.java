@@ -6,6 +6,8 @@ import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.UsuarioRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository {
     private final UsuarioMapper usuarioMapper;
@@ -24,8 +26,12 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public Usuario buscarPorEmail(String email) {
-        JpaUsuarioEntity jpaUsuario = jpaUsuarioRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("usuário não encontrado"));
-        return usuarioMapper.jpaUsuarioToDominio(jpaUsuario);
+    public Optional<Usuario> buscarPorEmail(String email) {
+        Optional<JpaUsuarioEntity> resultado = jpaUsuarioRepository.findByEmail(email);
+        if (resultado.isEmpty()) return Optional.empty();
+        else {
+            JpaUsuarioEntity usuarioEntity = resultado.get();
+            return Optional.of(usuarioMapper.jpaUsuarioToDominio(usuarioEntity));
+        }
     }
 }

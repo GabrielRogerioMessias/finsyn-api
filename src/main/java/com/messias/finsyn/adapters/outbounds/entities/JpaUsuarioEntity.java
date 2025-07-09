@@ -16,6 +16,7 @@ public class JpaUsuarioEntity {
     private UUID id;
     private String nome;
     private String sobrenome;
+    @Column(unique = true)
     private String email;
     private String senha;
     @OneToMany(mappedBy = "usuario")
