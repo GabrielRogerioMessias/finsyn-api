@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoriaRepository {
     public Categoria registrar(Categoria categoria);
 
-    public void deletarCategoria(Long idcategoria);
+    public void deletar(Long idcategoria);
 
     public List<Categoria> buscarTodas();
 
