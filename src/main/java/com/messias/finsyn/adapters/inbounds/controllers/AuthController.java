@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<UsuarioRespostaDTO> register(@RequestBody UsuarioRegistrarDTO registrarDTO) {
+    public ResponseEntity<UsuarioRespostaDTO> register(@RequestBody @Valid UsuarioRegistrarDTO registrarDTO) {
         Usuario usuario = usuarioDTOMapper.dtoRegistrarToDomain(registrarDTO);
         return ResponseEntity.ok().body(usuarioDTOMapper.dtoRespostaToDto(authUseCase.registrar(usuario)));
     }
