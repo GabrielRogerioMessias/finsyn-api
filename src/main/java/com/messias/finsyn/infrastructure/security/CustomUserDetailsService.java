@@ -1,7 +1,7 @@
 package com.messias.finsyn.infrastructure.security;
 
 import com.messias.finsyn.adapters.outbounds.entities.JpaUsuarioEntity;
-import com.messias.finsyn.adapters.outbounds.repositories.JpaUsuarioRepository;
+import com.messias.finsyn.adapters.outbounds.repositories.usuario.JpaUsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

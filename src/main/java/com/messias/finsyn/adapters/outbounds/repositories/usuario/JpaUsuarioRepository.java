@@ -1,4 +1,4 @@
-package com.messias.finsyn.adapters.outbounds.repositories;
+package com.messias.finsyn.adapters.outbounds.repositories.usuario;
 
 import com.messias.finsyn.adapters.outbounds.entities.JpaUsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
