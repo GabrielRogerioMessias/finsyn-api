@@ -1,11 +1,8 @@
 package com.messias.finsyn.application.services;
 
 import com.messias.finsyn.adapters.inbounds.dtos.LoginDataDTO;
-import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRegistrarDTO;
-import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRespostaDTO;
-import com.messias.finsyn.adapters.inbounds.mappers.UsuarioDTOMapper;
-import com.messias.finsyn.adapters.outbounds.entities.JpaUsuarioEntity;
-import com.messias.finsyn.adapters.outbounds.entities.mappers.UsuarioMapper;
+import com.messias.finsyn.application.exceptions.UsuarioJaRegistradoException;
+import com.messias.finsyn.application.exceptions.UsuarioNaoEncontradoException;
 import com.messias.finsyn.application.usecases.AuthUseCase;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.UsuarioRepository;
@@ -29,7 +26,7 @@ public class AuthServiceImpl implements AuthUseCase {
 
     @Override
     public Token login(LoginDataDTO login) {
-        Usuario usuario = usuarioRepository.buscarPorEmail(login.getEmail());
+        Usuario usuario = usuarioRepository.buscarPorEmail(login.getEmail()).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado com e-mail: " + login.getEmail()));
         if (passwordEncoder.matches(login.getSenha(), usuario.getSenha())) {
             return this.tokenService.generateToken(usuario);
         }
@@ -38,7 +35,11 @@ public class AuthServiceImpl implements AuthUseCase {
 
     @Override
     public Usuario registrar(Usuario novoUsuario) {
-        novoUsuario.setSenha(passwordEncoder.encode(novoUsuario.getSenha()));
-        return usuarioRepository.cadastrar(novoUsuario);
+        if (usuarioRepository.buscarPorEmail(novoUsuario.getEmail()).isEmpty()) {
+            novoUsuario.setSenha(passwordEncoder.encode(novoUsuario.getSenha()));
+            return usuarioRepository.cadastrar(novoUsuario);
+        } else {
+            throw new UsuarioJaRegistradoException(novoUsuario.getEmail());
+        }
     }
 }
