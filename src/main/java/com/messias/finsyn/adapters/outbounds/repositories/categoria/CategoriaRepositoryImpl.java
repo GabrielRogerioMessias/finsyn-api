@@ -7,10 +7,12 @@ import com.messias.finsyn.adapters.outbounds.entities.mappers.UsuarioMapper;
 import com.messias.finsyn.domain.models.categoria.Categoria;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.CategoriaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class CategoriaRepositoryImpl implements CategoriaRepository {
     private final JpaCategoriaRepository jpaCategoriaRepository;
     private final CategoriaMapper categoriaMapper;

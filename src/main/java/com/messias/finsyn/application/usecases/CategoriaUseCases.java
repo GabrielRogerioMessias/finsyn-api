@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface CategoriaUseCases {
     public Categoria criarNovaCategoria(Categoria categoria);
 
-    public void deletarCategoria(Usuario usuario, Long idcategoria);
+    public void deletarCategoria(Long idcategoria);
 
-    public List<Categoria> buscarTodas(Usuario usuario);
+    public List<Categoria> buscarTodas();
 
     public Categoria atualizarCategoria(Categoria categoria, Long idCategoria);
 
-    public Optional<Categoria> buscarCategoriaPorId(Usuario usuario, Long id);
+    public Optional<Categoria> buscarCategoriaPorId(Long id);
 }

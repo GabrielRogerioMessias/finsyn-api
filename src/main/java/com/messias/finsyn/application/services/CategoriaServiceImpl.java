@@ -4,30 +4,39 @@ import com.messias.finsyn.application.usecases.CategoriaUseCases;
 import com.messias.finsyn.domain.models.categoria.Categoria;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.CategoriaRepository;
+import com.messias.finsyn.infrastructure.security.SecurityUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CategoriaServiceImpl implements CategoriaUseCases {
     private final CategoriaRepository categoriaRepository;
+    private final SecurityUtils securityUtils;
 
-    public CategoriaServiceImpl(CategoriaRepository categoriaRepository) {
+    public CategoriaServiceImpl(CategoriaRepository categoriaRepository, SecurityUtils securityUtils) {
         this.categoriaRepository = categoriaRepository;
+        this.securityUtils = securityUtils;
     }
+
 
     @Override
     public Categoria criarNovaCategoria(Categoria categoria) {
-        return null;
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        categoria.setUsuario(usuario);
+        return categoriaRepository.registrar(categoria);
     }
 
     @Override
-    public void deletarCategoria(Usuario usuario, Long idcategoria) {
+    public void deletarCategoria(Long idcategoria) {
 
     }
 
     @Override
-    public List<Categoria> buscarTodas(Usuario usuario) {
-        return List.of();
+    public List<Categoria> buscarTodas() {
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        return categoriaRepository.buscarTodas(usuario);
     }
 
     @Override
@@ -36,7 +45,7 @@ public class CategoriaServiceImpl implements CategoriaUseCases {
     }
 
     @Override
-    public Optional<Categoria> buscarCategoriaPorId(Usuario usuario, Long id) {
+    public Optional<Categoria> buscarCategoriaPorId(Long id) {
         return Optional.empty();
     }
 }

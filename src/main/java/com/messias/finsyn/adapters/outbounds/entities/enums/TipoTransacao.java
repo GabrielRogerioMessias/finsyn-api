@@ -1,5 +1,9 @@
 package com.messias.finsyn.adapters.outbounds.entities.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+
 import java.util.Arrays;
 
 public enum TipoTransacao {
@@ -7,21 +11,24 @@ public enum TipoTransacao {
     DESPESA("D", "Despesa"),
     TRANSFERENCIA_META("TM", "Transferência Meta");
 
-    private String codigo;
-    private String descricao;
+    private final String codigo;
+    @Getter
+    private final String descricao;
 
     TipoTransacao(String codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
 
-    public static com.messias.finsyn.domain.models.enums.TipoTransacao valor(String codigo) {
-        return Arrays.stream(com.messias.finsyn.domain.models.enums.TipoTransacao.values())
-                .filter(contexto -> contexto.getCodigo().equals(codigo))
+    @JsonCreator
+    public static TipoTransacao valor(String codigo) {
+        return Arrays.stream(TipoTransacao.values())
+                .filter(contexto -> contexto.codigo.equals(codigo))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Code: " + codigo));
     }
 
+    @JsonValue
     public String getCodigo() {
         return codigo;
     }
