@@ -3,7 +3,7 @@ package com.messias.finsyn.application.services;
 import com.messias.finsyn.adapters.inbounds.dtos.LoginDataDTO;
 import com.messias.finsyn.application.exceptions.UsuarioJaRegistradoException;
 import com.messias.finsyn.application.exceptions.UsuarioNaoEncontradoException;
-import com.messias.finsyn.application.usecases.AuthUseCase;
+import com.messias.finsyn.application.usecases.AuthUseCases;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.UsuarioRepository;
 import com.messias.finsyn.infrastructure.security.Token;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImpl implements AuthUseCase {
+public class AuthServiceImpl implements AuthUseCases {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;

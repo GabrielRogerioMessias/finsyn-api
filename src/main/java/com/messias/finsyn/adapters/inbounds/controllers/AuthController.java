@@ -4,7 +4,7 @@ import com.messias.finsyn.adapters.inbounds.dtos.LoginDataDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRegistrarDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRespostaDTO;
 import com.messias.finsyn.adapters.inbounds.mappers.UsuarioDTOMapper;
-import com.messias.finsyn.application.usecases.AuthUseCase;
+import com.messias.finsyn.application.usecases.AuthUseCases;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.infrastructure.security.Token;
 import jakarta.validation.Valid;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final AuthUseCase authUseCase;
+    private final AuthUseCases authUseCase;
     private final UsuarioDTOMapper usuarioDTOMapper;
 
-    public AuthController(AuthUseCase authUseCase, UsuarioDTOMapper usuarioDTOMapper) {
+    public AuthController(AuthUseCases authUseCase, UsuarioDTOMapper usuarioDTOMapper) {
         this.authUseCase = authUseCase;
         this.usuarioDTOMapper = usuarioDTOMapper;
     }
