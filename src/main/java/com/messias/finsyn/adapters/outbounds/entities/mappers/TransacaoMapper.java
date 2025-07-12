@@ -7,14 +7,13 @@ import com.messias.finsyn.domain.models.transacao.Transacao;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UsuarioMapper.class})
 public interface TransacaoMapper {
-    @Mapping(target = "categoria.usuario.categorias", ignore = true)
-    @Mapping(target = "usuario.categorias", ignore = true)
-    @Mapping(target = "usuario.transacoes", ignore = true)
+    @Mapping(target = "categoria.transacoes", ignore = true)
+    @Mapping(target = "categoria.usuario", ignore = true)
     Transacao jpaToDomain(JpaTransacaoEntity jpaTransacaoEntity);
-    @Mapping(target = "categoria.usuario.categorias", ignore = true)
-    @Mapping(target = "usuario.categorias", ignore = true)
-    @Mapping(target = "usuario.transacoes", ignore = true)
+
+    @Mapping(target = "categoria.transacoes", ignore = true)
+    @Mapping(target = "categoria.usuario", ignore = true)
     JpaTransacaoEntity domainToJpa(Transacao transacao);
 }

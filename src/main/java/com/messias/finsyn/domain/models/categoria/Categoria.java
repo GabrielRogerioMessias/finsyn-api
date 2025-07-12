@@ -4,6 +4,7 @@ import com.messias.finsyn.domain.models.enums.TipoTransacao;
 import com.messias.finsyn.domain.models.transacao.Transacao;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Categoria {
@@ -11,7 +12,7 @@ public class Categoria {
     private String descricao;
     private TipoTransacao tipo;
     private Usuario usuario;
-    private List<Transacao> transacoes;
+    private List<Transacao> transacoes = new ArrayList<>();
 
     public Categoria() {
     }

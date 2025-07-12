@@ -5,6 +5,7 @@ import com.messias.finsyn.domain.models.deposito_meta.DepositoMeta;
 import com.messias.finsyn.domain.models.meta_financeira.MetaFinanceira;
 import com.messias.finsyn.domain.models.transacao.Transacao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,10 +15,10 @@ public class Usuario {
     private String sobrenome;
     private String email;
     private String senha;
-    private List<Transacao> transacoes;
-    private List<Categoria> categorias;
-    private List<MetaFinanceira> metasFinanceiras;
-    private List<DepositoMeta> depositosMetas;
+    private List<Transacao> transacoes = new ArrayList<>();
+    private List<Categoria> categorias = new ArrayList<>();
+    private List<MetaFinanceira> metasFinanceiras = new ArrayList<>();
+    private List<DepositoMeta> depositosMetas = new ArrayList<>();
 
     public Usuario() {
     }

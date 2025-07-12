@@ -45,7 +45,7 @@ public class CategoriaController {
         return ResponseEntity.ok().body(mapper.domainToCategoriaRespostaDto(categoriaUseCases.buscarCategoriaPorId(idCategoria)));
     }
 
-    @PutMapping("/{idCategoriaExistente}")
+    @PutMapping(value = "/{idCategoriaExistente}")
     public ResponseEntity<CategoriaRespostaDTO> atualizarCategoria(@RequestBody CategoriaRegistrarDTO categoriaAtualizada, @PathVariable Long idCategoriaExistente) {
         Categoria categoria = mapper.categoriaRegistrarDtoToDomain(categoriaAtualizada);
         return ResponseEntity.ok().body(mapper.domainToCategoriaRespostaDto(categoriaUseCases.atualizarCategoria(categoria, idCategoriaExistente)));
