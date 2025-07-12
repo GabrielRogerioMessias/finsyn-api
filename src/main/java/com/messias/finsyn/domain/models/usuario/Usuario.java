@@ -1,6 +1,7 @@
 package com.messias.finsyn.domain.models.usuario;
 
 import com.messias.finsyn.domain.models.categoria.Categoria;
+import com.messias.finsyn.domain.models.deposito_meta.DepositoMeta;
 import com.messias.finsyn.domain.models.meta_financeira.MetaFinanceira;
 import com.messias.finsyn.domain.models.transacao.Transacao;
 
@@ -16,6 +17,7 @@ public class Usuario {
     private List<Transacao> transacoes;
     private List<Categoria> categorias;
     private List<MetaFinanceira> metasFinanceiras;
+    private List<DepositoMeta> depositosMetas;
 
     public Usuario() {
     }
@@ -92,5 +94,12 @@ public class Usuario {
     public void setMetasFinanceiras(List<MetaFinanceira> metasFinanceiras) {
         this.metasFinanceiras = metasFinanceiras;
     }
-    
+
+    public List<DepositoMeta> getDepositosMetas() {
+        return depositosMetas;
+    }
+
+    public void setDepositosMetas(List<DepositoMeta> depositosMetas) {
+        this.depositosMetas = depositosMetas;
+    }
 }

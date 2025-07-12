@@ -19,7 +19,7 @@ public class UsuarioServiceimpl implements UsuarioUseCases {
 
     @Override
     public Usuario cadastrar(UsuarioRegistrarDTO usuario) {
-        Usuario novoUsuario = usuarioDTOMapper.dtoRegistrarToDomain(usuario);
+        Usuario novoUsuario = usuarioDTOMapper.usuarioRegistrarDtoToDomain(usuario);
         return usuarioCadastroUseCase.cadastrar(novoUsuario);
     }
 }

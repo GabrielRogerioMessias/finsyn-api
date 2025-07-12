@@ -13,5 +13,4 @@ public class CategoriaRespostaDTO {
     private Long id;
     private String descricao;
     private TipoTransacao tipo;
-    private Usuario usuario;
 }
