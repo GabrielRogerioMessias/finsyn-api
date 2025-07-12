@@ -19,8 +19,4 @@ public interface JpaCategoriaRepository extends JpaRepository<JpaCategoriaEntity
     Optional<JpaCategoriaEntity> buscarPorIdEUsuario(@Param(value = "usuario") JpaUsuarioEntity usuario,
                                                      @Param(value = "categoriaID") Long categoriaID);
 
-    @Modifying
-    @Query("DELETE JpaCategoriaEntity AS c WHERE c.id = :categoriaID")
-    void deletarPorId(@Param(value = "categoriaID") Long categoriaID);
-
 }
