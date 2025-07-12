@@ -2,7 +2,7 @@ package com.messias.finsyn.application.services;
 
 import com.messias.finsyn.adapters.inbounds.dtos.LoginDataDTO;
 import com.messias.finsyn.application.exceptions.UsuarioJaRegistradoException;
-import com.messias.finsyn.application.exceptions.UsuarioNaoEncontradoException;
+import com.messias.finsyn.application.exceptions.EntidadeNaoEncontradaException;
 import com.messias.finsyn.application.usecases.AuthUseCases;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.UsuarioRepository;
@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthUseCases {
 
     @Override
     public Token login(LoginDataDTO login) {
-        Usuario usuario = usuarioRepository.buscarPorEmail(login.getEmail()).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado com e-mail: " + login.getEmail()));
+        Usuario usuario = usuarioRepository.buscarPorEmail(login.getEmail()).orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário não encontrado com e-mail: " + login.getEmail()));
         if (passwordEncoder.matches(login.getSenha(), usuario.getSenha())) {
             return this.tokenService.generateToken(usuario);
         }
