@@ -1,5 +1,6 @@
 package com.messias.finsyn.application.services;
 
+import com.messias.finsyn.application.exceptions.EntidadeNaoEncontradaException;
 import com.messias.finsyn.application.usecases.CategoriaUseCases;
 import com.messias.finsyn.domain.models.categoria.Categoria;
 import com.messias.finsyn.domain.models.usuario.Usuario;
@@ -8,7 +9,6 @@ import com.messias.finsyn.infrastructure.security.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaUseCases {
@@ -20,7 +20,6 @@ public class CategoriaServiceImpl implements CategoriaUseCases {
         this.securityUtils = securityUtils;
     }
 
-
     @Override
     public Categoria criarNovaCategoria(Categoria categoria) {
         Usuario usuario = securityUtils.usuarioAutenticado();
@@ -30,7 +29,9 @@ public class CategoriaServiceImpl implements CategoriaUseCases {
 
     @Override
     public void deletarCategoria(Long idcategoria) {
-
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        Categoria categoria = categoriaRepository.buscarCategoriaId(usuario, idcategoria).orElseThrow(() -> new EntidadeNaoEncontradaException("Categoria não encontrada com o id: " + idcategoria));
+        categoriaRepository.deletar(categoria);
     }
 
     @Override
@@ -40,12 +41,22 @@ public class CategoriaServiceImpl implements CategoriaUseCases {
     }
 
     @Override
-    public Categoria atualizarCategoria(Categoria categoria, Long idCategoria) {
-        return null;
+    public Categoria atualizarCategoria(Categoria categoriaAtualizada, Long idCategoria) {
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        Categoria existente = categoriaRepository.buscarCategoriaId(usuario, idCategoria).orElseThrow(() -> new EntidadeNaoEncontradaException("Categoria não encontrada com o di: " + idCategoria));
+        this.atualizarCampos(existente, categoriaAtualizada);
+        return categoriaRepository.atualizarCategoria(existente);
     }
 
     @Override
-    public Optional<Categoria> buscarCategoriaPorId(Long id) {
-        return Optional.empty();
+    public Categoria buscarCategoriaPorId(Long idCategoria) {
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        return categoriaRepository.buscarCategoriaId(usuario, idCategoria).orElseThrow(() -> new EntidadeNaoEncontradaException("Categoria não encontrada com o di: " + idCategoria));
+    }
+
+    private void atualizarCampos(Categoria existente, Categoria atualizada) {
+        existente.setDescricao(atualizada.getDescricao());
+        existente.setTipo(atualizada.getTipo());
     }
 }
+

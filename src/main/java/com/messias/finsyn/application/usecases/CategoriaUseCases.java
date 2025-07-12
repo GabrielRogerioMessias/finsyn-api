@@ -15,5 +15,5 @@ public interface CategoriaUseCases {
 
     public Categoria atualizarCategoria(Categoria categoria, Long idCategoria);
 
-    public Optional<Categoria> buscarCategoriaPorId(Long id);
+    public Categoria buscarCategoriaPorId(Long id);
 }

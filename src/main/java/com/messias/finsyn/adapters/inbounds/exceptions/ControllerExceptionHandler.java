@@ -1,7 +1,7 @@
 package com.messias.finsyn.adapters.inbounds.exceptions;
 
 import com.messias.finsyn.application.exceptions.UsuarioJaRegistradoException;
-import com.messias.finsyn.application.exceptions.UsuarioNaoEncontradoException;
+import com.messias.finsyn.application.exceptions.EntidadeNaoEncontradaException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +43,9 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(standardError);
     }
 
-    @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ResponseEntity<StandardError> usuarioJaCadastradoException(UsuarioNaoEncontradoException ex, HttpServletRequest request) {
-        String mensagemDeErro = "Usuário não encontrado";
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<StandardError> entidadeNaoEncontradaException(EntidadeNaoEncontradaException ex, HttpServletRequest request) {
+        String mensagemDeErro = "Entidade não encontrada!";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError standardError = new StandardError(Instant.now(),
                 status.value(),
