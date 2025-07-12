@@ -44,8 +44,8 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(EntidadeNaoEncontradaException.class)
-    public ResponseEntity<StandardError> usuarioJaCadastradoException(EntidadeNaoEncontradaException ex, HttpServletRequest request) {
-        String mensagemDeErro = "Usuário não encontrado";
+    public ResponseEntity<StandardError> entidadeNaoEncontradaException(EntidadeNaoEncontradaException ex, HttpServletRequest request) {
+        String mensagemDeErro = "Entidade não encontrada!";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError standardError = new StandardError(Instant.now(),
                 status.value(),

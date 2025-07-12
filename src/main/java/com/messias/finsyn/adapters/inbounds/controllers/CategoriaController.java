@@ -34,5 +34,22 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.domainToCategoriaRespostaDto(novaCategoria));
     }
 
+    @DeleteMapping(value = "/{idCategoria}")
+    public ResponseEntity<Void> deletar(@PathVariable Long idCategoria) {
+        categoriaUseCases.deletarCategoria(idCategoria);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "{idCategoria}")
+    public ResponseEntity<CategoriaRespostaDTO> buscarPorId(@PathVariable Long idCategoria) {
+        return ResponseEntity.ok().body(mapper.domainToCategoriaRespostaDto(categoriaUseCases.buscarCategoriaPorId(idCategoria)));
+    }
+
+    @PutMapping("/{idCategoriaExistente}")
+    public ResponseEntity<CategoriaRespostaDTO> atualizarCategoria(@RequestBody CategoriaRegistrarDTO categoriaAtualizada, @PathVariable Long idCategoriaExistente) {
+        Categoria categoria = mapper.categoriaRegistrarDtoToDomain(categoriaAtualizada);
+        return ResponseEntity.ok().body(mapper.domainToCategoriaRespostaDto(categoriaUseCases.atualizarCategoria(categoria, idCategoriaExistente)));
+    }
+
 
 }

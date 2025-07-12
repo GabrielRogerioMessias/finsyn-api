@@ -34,9 +34,9 @@ public class CategoriaRepositoryImpl implements CategoriaRepository {
     }
 
     @Override
-    public void deletar(Usuario usuario, Long idcategoria) {
-        JpaUsuarioEntity usuarioEntity = usuarioMapper.usuarioToJpaUsuario(usuario);
-        jpaCategoriaRepository.deletarPorUsuario(usuarioEntity, idcategoria);
+    public void deletar(Categoria categoria) {
+        JpaCategoriaEntity entity = categoriaMapper.domainToJpaCategoria(categoria);
+        jpaCategoriaRepository.delete(entity);
     }
 
     @Override

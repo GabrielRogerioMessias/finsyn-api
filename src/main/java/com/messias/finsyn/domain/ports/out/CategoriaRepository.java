@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface CategoriaRepository {
     public Categoria registrar(Categoria categoria);
 
-    public void deletar(Usuario usuario, Long idcategoria);
+    public void deletar(Categoria categoria);
 
     public List<Categoria> buscarTodas(Usuario usuario);
 
