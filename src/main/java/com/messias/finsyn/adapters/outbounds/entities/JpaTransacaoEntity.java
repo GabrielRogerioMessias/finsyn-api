@@ -16,6 +16,7 @@ public class JpaTransacaoEntity {
     private Long id;
     private String descricao;
     private BigDecimal valor;
+    @Enumerated(EnumType.STRING)
     private TipoTransacao tipo;
     @Column(name = "data_transacao")
     private LocalDateTime dataTransacao;

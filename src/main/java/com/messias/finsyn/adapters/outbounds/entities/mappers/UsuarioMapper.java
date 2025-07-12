@@ -12,10 +12,10 @@ public interface UsuarioMapper {
     @Mapping(target = "metasFinanceiras", ignore = true)
     @Mapping(target = "depositosMetas", ignore = true)
     Usuario jpaUsuarioToDominio(JpaUsuarioEntity jpaUsuarioEntity);
+
     @Mapping(target = "categorias", ignore = true)
     @Mapping(target = "transacoes", ignore = true)
     @Mapping(target = "metasFinanceiras", ignore = true)
     @Mapping(target = "depositosMetas", ignore = true)
     JpaUsuarioEntity usuarioToJpaUsuario(Usuario usuario);
-
 }

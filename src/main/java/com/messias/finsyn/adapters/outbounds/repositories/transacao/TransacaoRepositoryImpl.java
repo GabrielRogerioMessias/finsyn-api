@@ -7,10 +7,12 @@ import com.messias.finsyn.adapters.outbounds.entities.mappers.UsuarioMapper;
 import com.messias.finsyn.domain.models.transacao.Transacao;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.TransacaoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class TransacaoRepositoryImpl implements TransacaoRepository {
     private final JpaTransacaoRepository jpaTransacaoRepository;
     private final TransacaoMapper mapper;
