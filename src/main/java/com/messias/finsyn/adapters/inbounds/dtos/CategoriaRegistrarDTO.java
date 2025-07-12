@@ -1,6 +1,6 @@
 package com.messias.finsyn.adapters.inbounds.dtos;
 
-import com.messias.finsyn.domain.models.enums.TipoTransacao;
+import com.messias.finsyn.adapters.outbounds.entities.enums.TipoTransacao;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
