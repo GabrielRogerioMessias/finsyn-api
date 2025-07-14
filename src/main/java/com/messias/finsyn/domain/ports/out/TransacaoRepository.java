@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransacaoRepository {
-    public Transacao criarTransacao(Transacao transacao);
+    Transacao criarTransacao(Transacao transacao);
 
-    public void deletarTransacao(Transacao transacao);
+    void deletarTransacao(Transacao transacao);
 
-    public List<Transacao> buscarTodas(Usuario usuario);
+    List<Transacao> buscarTodas(Usuario usuario);
 
-    public Transacao atualizarTransacao(Transacao transacao);
+    Transacao atualizarTransacao(Transacao transacao);
 
-    public Optional<Transacao> buscarPorId(Usuario usuario, Long id);
+    Optional<Transacao> buscarPorId(Usuario usuario, Long id);
 
 }
