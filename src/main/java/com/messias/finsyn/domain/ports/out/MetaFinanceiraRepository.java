@@ -6,7 +6,7 @@ import com.messias.finsyn.domain.models.usuario.Usuario;
 import java.util.List;
 import java.util.Optional;
 
-public interface MetasFinanceirasRepository {
+public interface MetaFinanceiraRepository {
     MetaFinanceira criarMeta(MetaFinanceira metaFinanceira);
 
     void deletarMeta(MetaFinanceira metaFinanceira);
@@ -15,5 +15,5 @@ public interface MetasFinanceirasRepository {
 
     MetaFinanceira atualizarMeta(MetaFinanceira metaFinanceira);
 
-    Optional<MetaFinanceira> buscarPorId(Long idMeta);
+    Optional<MetaFinanceira> buscarPorId(Usuario usuario, Long idMeta);
 }
