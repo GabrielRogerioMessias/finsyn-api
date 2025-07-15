@@ -5,7 +5,7 @@ import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.infrastructure.security.Token;
 
 public interface AuthUseCases {
-    public Token login(LoginDataDTO login);
+    Token login(LoginDataDTO login);
 
-    public Usuario registrar(Usuario registrar);
+    Usuario registrar(Usuario registrar);
 }

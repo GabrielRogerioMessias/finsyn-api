@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoriaRepository {
-    public Categoria registrar(Categoria categoria);
+    Categoria registrar(Categoria categoria);
 
-    public void deletar(Categoria categoria);
+    void deletar(Categoria categoria);
 
-    public List<Categoria> buscarTodas(Usuario usuario);
+    List<Categoria> buscarTodas(Usuario usuario);
 
-    public Categoria atualizarCategoria(Categoria categoria);
+    Categoria atualizarCategoria(Categoria categoria);
 
-    public Optional<Categoria> buscarCategoriaId(Usuario usuario, Long id);
+    Optional<Categoria> buscarCategoriaId(Usuario usuario, Long id);
 }
