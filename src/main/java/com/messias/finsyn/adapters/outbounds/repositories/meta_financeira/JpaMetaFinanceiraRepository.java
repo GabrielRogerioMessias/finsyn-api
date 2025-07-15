@@ -17,6 +17,5 @@ public interface JpaMetaFinanceiraRepository extends JpaRepository<JpaMetaFinanc
     @Query(value = "SELECT mt FROM JpaMetaFinanceiraEntity AS mt WHERE mt.usuario=:usuario AND mt.id = :idMetaFinanceira")
     Optional<JpaMetaFinanceiraEntity> buscarPorId(@Param(value = "usuario") JpaUsuarioEntity usuario,
                                                   @Param(value = "idMetaFinanceira") Long idMetaFinanceira);
-
-    Long id(Long id);
+    
 }
