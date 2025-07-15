@@ -8,6 +8,7 @@ import com.messias.finsyn.domain.ports.out.MetaFinanceiraRepository;
 import com.messias.finsyn.infrastructure.security.SecurityUtils;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -25,6 +26,7 @@ public class MetaFinanceiraServiceImpl implements MetaFinanceiraUseCases {
         Usuario usuario = securityUtils.usuarioAutenticado();
         metaFinanceira.setUsuario(usuario);
         metaFinanceira.setAtivo(true);
+        if (metaFinanceira.getValorAtual() == null) metaFinanceira.setValorAtual(BigDecimal.ZERO);
         return repository.criarMeta(metaFinanceira);
     }
 
@@ -43,12 +45,22 @@ public class MetaFinanceiraServiceImpl implements MetaFinanceiraUseCases {
 
     @Override
     public MetaFinanceira atualizarMeta(MetaFinanceira metaAtualizada, Long idExistente) {
-        return null;
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        MetaFinanceira existente = repository.buscarPorId(usuario, idExistente).orElseThrow(() -> new EntidadeNaoEncontradaException("Meta Financeira não encontrada com o id: " + idExistente));
+        this.atualizarCampos(existente, metaAtualizada);
+        return repository.atualizarMeta(existente);
     }
 
     @Override
     public MetaFinanceira buscarPorId(Long idMeta) {
         Usuario usuario = securityUtils.usuarioAutenticado();
         return repository.buscarPorId(usuario, idMeta).orElseThrow(() -> new EntidadeNaoEncontradaException("Meta Financeira não encontrada com o id: " + idMeta));
+    }
+
+    private void atualizarCampos(MetaFinanceira existente, MetaFinanceira atualizada) {
+        existente.setValorAtual(atualizada.getValorAtual());
+        existente.setValorObjetivo(atualizada.getValorObjetivo());
+        existente.setDescricao(atualizada.getDescricao());
+        existente.setDataLimite(atualizada.getDataLimite());
     }
 }
