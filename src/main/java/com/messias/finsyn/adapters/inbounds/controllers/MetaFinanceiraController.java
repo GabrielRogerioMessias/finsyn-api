@@ -1,12 +1,9 @@
 package com.messias.finsyn.adapters.inbounds.controllers;
 
-import com.messias.finsyn.adapters.inbounds.dtos.CategoriaRegistrarDTO;
-import com.messias.finsyn.adapters.inbounds.dtos.CategoriaRespostaDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.MetaFinanceiraRegistrarDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.MetaFinanceiraRespostaDTO;
 import com.messias.finsyn.adapters.inbounds.mappers.MetaFinanceiraDTOMapper;
 import com.messias.finsyn.application.usecases.MetaFinanceiraUseCases;
-import com.messias.finsyn.domain.models.categoria.Categoria;
 import com.messias.finsyn.domain.models.meta_financeira.MetaFinanceira;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
