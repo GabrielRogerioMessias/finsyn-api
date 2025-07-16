@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "meta_financeira")
+@Table(name = "META_FINANCEIRA")
 @Data
 public class JpaMetaFinanceiraEntity {
     @Id

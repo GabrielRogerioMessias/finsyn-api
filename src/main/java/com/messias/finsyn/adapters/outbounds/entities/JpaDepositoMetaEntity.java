@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "deposito_meta")
+@Table(name = "DEPOSITO_META")
 @Data
 public class JpaDepositoMetaEntity {
     @Id
