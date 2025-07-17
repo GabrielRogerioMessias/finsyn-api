@@ -14,7 +14,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MetaFinanceiraDTOMapper {
-    @Mapping(source = "depositos", target = "valorGuardado", qualifiedByName = "somarDepositos")
+    @Mapping(source = "depositos", target = "valorAtual", qualifiedByName = "somarDepositos")
     MetaFinanceiraRespostaDTO domainToRespostaDTO(MetaFinanceira metaFinanceira);
 
     MetaFinanceira metaRegistrarDtoToDomain(MetaFinanceiraRegistrarDTO dto);

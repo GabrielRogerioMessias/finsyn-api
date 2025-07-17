@@ -14,8 +14,7 @@ public class MetaFinanceiraRespostaDTO {
     private Long id;
     private String descricao;
     private BigDecimal valorObjetivo;
-    private BigDecimal valorAtual;
+    private Double valorAtual;
     private Boolean ativo;
     private Date dataLimite;
-    private Double valorGuardado;
 }
