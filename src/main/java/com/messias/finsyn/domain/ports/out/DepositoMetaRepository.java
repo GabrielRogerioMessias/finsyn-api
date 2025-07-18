@@ -11,7 +11,7 @@ public interface DepositoMetaRepository {
 
     void deletar(DepositoMeta depositoMeta);
 
-    List<DepositoMeta> buscarTodos(Usuario usuario);
+    List<DepositoMeta> buscarTodos(Usuario usuario, Long idMetaFinanceira);
 
     DepositoMeta atualizar(DepositoMeta depositoMeta);
 

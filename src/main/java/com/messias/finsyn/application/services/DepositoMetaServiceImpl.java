@@ -34,8 +34,8 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
 
     @Override
     public DepositoMeta registrar(DepositoMeta depositoMeta) {
-        Long idMetaFinanceira = depositoMeta.getMetaFinanceira().getId();
         Usuario usuario = securityUtils.usuarioAutenticado();
+        Long idMetaFinanceira = depositoMeta.getMetaFinanceira().getId();
         MetaFinanceira metaFinanceira = metaFinanceiraRepository.buscarPorId(usuario, idMetaFinanceira).orElseThrow(() -> new EntidadeNaoEncontradaException("Meta financeira não encontrada com o ID: " + idMetaFinanceira));
 
         Transacao transacao = new Transacao();
@@ -54,21 +54,36 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
 
     @Override
     public void deletar(Long idDepositoMeta) {
-
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        DepositoMeta depositoMeta = repository.buscarPorId(usuario, idDepositoMeta)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Deposito não encontrado com o id: " + idDepositoMeta));
+        repository.deletar(depositoMeta);
     }
 
+
     @Override
-    public List<DepositoMeta> buscarTodos() {
-        return List.of();
+    public List<DepositoMeta> buscarTodos(Long idMetaFinanceira) {
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        return repository.buscarTodos(usuario, idMetaFinanceira);
     }
 
     @Override
     public DepositoMeta atualizar(DepositoMeta depositoMetaAtualizado, Long idDepositoExistente) {
-        return null;
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        DepositoMeta existente = repository.buscarPorId(usuario, idDepositoExistente).orElseThrow(() -> new EntidadeNaoEncontradaException("Deposito não encontrado com o id: " + idDepositoExistente));
+        atualizarCampos(existente, depositoMetaAtualizado);
+        return repository.atualizar(existente);
     }
 
     @Override
     public DepositoMeta buscarPorId(Long idDeposito) {
-        return null;
+        Usuario usuario = securityUtils.usuarioAutenticado();
+        return repository.buscarPorId(usuario, idDeposito).orElseThrow(() -> new EntidadeNaoEncontradaException("Deposito não encontrado com o id: " + idDeposito));
+    }
+
+    private void atualizarCampos(DepositoMeta existente, DepositoMeta atualizado) {
+        existente.setValor(atualizado.getValor());
+        existente.setObservacao(atualizado.getObservacao());
+        existente.setDataDeposito(atualizado.getDataDeposito());
     }
 }

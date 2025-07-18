@@ -11,7 +11,7 @@ public interface DepositoMetaUseCases {
 
     void deletar(Long idDepositoMeta);
 
-    List<DepositoMeta> buscarTodos();
+    List<DepositoMeta> buscarTodos(Long idMeta);
 
     DepositoMeta atualizar(DepositoMeta depositoMetaAtualizado, Long idDepositoExistente);
 
