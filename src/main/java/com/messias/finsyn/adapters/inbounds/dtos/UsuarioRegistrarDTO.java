@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 
 @Data
 @AllArgsConstructor
@@ -20,4 +22,6 @@ public class UsuarioRegistrarDTO {
     @NotBlank(message = "A senha é obrigatória")
     @Size(max = 20, min = 6, message = "A senha deve conter no mínimo 4 caracteres e máximo de 20")
     private String senha;
+    @NotNull(message = "Saldo é obrigatório")
+    private BigDecimal saldo;
 }

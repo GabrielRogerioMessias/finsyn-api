@@ -5,6 +5,7 @@ import com.messias.finsyn.domain.models.deposito_meta.DepositoMeta;
 import com.messias.finsyn.domain.models.meta_financeira.MetaFinanceira;
 import com.messias.finsyn.domain.models.transacao.Transacao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +16,7 @@ public class Usuario {
     private String sobrenome;
     private String email;
     private String senha;
+    private BigDecimal saldo;
     private List<Transacao> transacoes = new ArrayList<>();
     private List<Categoria> categorias = new ArrayList<>();
     private List<MetaFinanceira> metasFinanceiras = new ArrayList<>();
@@ -23,12 +25,13 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(UUID id, String nome, String sobrenome, String email, String senha) {
+    public Usuario(UUID id, String nome, String sobrenome, String email,BigDecimal saldo, String senha) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.senha = senha;
+        this.saldo = saldo;
 
     }
 
@@ -70,6 +73,14 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 
     public List<Transacao> getTransacoes() {
