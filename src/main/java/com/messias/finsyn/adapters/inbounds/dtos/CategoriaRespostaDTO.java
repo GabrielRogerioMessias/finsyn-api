@@ -1,6 +1,5 @@
 package com.messias.finsyn.adapters.inbounds.dtos;
 
-import com.messias.finsyn.domain.models.enums.TipoTransacao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
