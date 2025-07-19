@@ -1,6 +1,5 @@
 package com.messias.finsyn.adapters.outbounds.entities;
 
-import com.messias.finsyn.adapters.outbounds.entities.enums.TipoTransacao;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,8 +13,6 @@ public class JpaCategoriaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    @Enumerated(EnumType.STRING)
-    private TipoTransacao tipo;
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private JpaUsuarioEntity usuario;

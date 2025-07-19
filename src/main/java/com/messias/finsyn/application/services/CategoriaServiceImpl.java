@@ -56,7 +56,6 @@ public class CategoriaServiceImpl implements CategoriaUseCases {
 
     private void atualizarCampos(Categoria existente, Categoria atualizada) {
         existente.setDescricao(atualizada.getDescricao());
-        existente.setTipo(atualizada.getTipo());
     }
 }
 

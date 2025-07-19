@@ -15,7 +15,4 @@ import lombok.NoArgsConstructor;
 public class CategoriaRegistrarDTO {
     @NotBlank(message = "Descrição é obrigatória")
     private String descricao;
-    @NotNull(message = "O Tipo não pode ser nulo")
-    @Enumerated(EnumType.STRING)
-    private TipoTransacao tipo;
 }
