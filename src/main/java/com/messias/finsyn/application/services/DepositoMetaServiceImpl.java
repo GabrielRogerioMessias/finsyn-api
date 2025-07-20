@@ -10,9 +10,11 @@ import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.domain.ports.out.DepositoMetaRepository;
 import com.messias.finsyn.domain.ports.out.MetaFinanceiraRepository;
 import com.messias.finsyn.domain.ports.out.TransacaoRepository;
+import com.messias.finsyn.domain.ports.out.UsuarioRepository;
 import com.messias.finsyn.infrastructure.security.SecurityUtils;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,15 +23,18 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
     private final SecurityUtils securityUtils;
     private final MetaFinanceiraRepository metaFinanceiraRepository;
     private final TransacaoRepository transacaoRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public DepositoMetaServiceImpl(DepositoMetaRepository repository,
                                    SecurityUtils securityUtils,
                                    MetaFinanceiraRepository metaFinanceiraRepository,
-                                   TransacaoRepository transacaoRepository) {
+                                   TransacaoRepository transacaoRepository,
+                                   UsuarioRepository usuarioRepository) {
         this.repository = repository;
         this.securityUtils = securityUtils;
         this.metaFinanceiraRepository = metaFinanceiraRepository;
         this.transacaoRepository = transacaoRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
@@ -49,6 +54,8 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
         depositoMeta.setMetaFinanceira(metaFinanceira);
         depositoMeta.setTransacao(transacao);
         depositoMeta.setUsuario(usuario);
+        usuario.setSaldo(usuario.getSaldo().subtract(transacao.getValor()));
+        usuarioRepository.cadastrar(usuario);
         return repository.registrar(depositoMeta);
     }
 
@@ -57,6 +64,8 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
         Usuario usuario = securityUtils.usuarioAutenticado();
         DepositoMeta depositoMeta = repository.buscarPorId(usuario, idDepositoMeta)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Deposito não encontrado com o id: " + idDepositoMeta));
+        usuario.setSaldo(usuario.getSaldo().add(depositoMeta.getValor()));
+        usuarioRepository.cadastrar(usuario);
         repository.deletar(depositoMeta);
     }
 
@@ -71,7 +80,14 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
     public DepositoMeta atualizar(DepositoMeta depositoMetaAtualizado, Long idDepositoExistente) {
         Usuario usuario = securityUtils.usuarioAutenticado();
         DepositoMeta existente = repository.buscarPorId(usuario, idDepositoExistente).orElseThrow(() -> new EntidadeNaoEncontradaException("Deposito não encontrado com o id: " + idDepositoExistente));
+        BigDecimal valorAntigo = existente.getValor();
+        BigDecimal valorAtualizado = depositoMetaAtualizado.getValor();
+        //Voltando para o valor anterior
+        usuario.setSaldo(usuario.getSaldo().add(valorAntigo));
         atualizarCampos(existente, depositoMetaAtualizado);
+        //Atualizando saldo para novo valor
+        usuario.setSaldo(usuario.getSaldo().subtract(valorAtualizado));
+        usuarioRepository.cadastrar(usuario);
         return repository.atualizar(existente);
     }
 
