@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
@@ -14,4 +15,5 @@ public class UsuarioRespostaDTO {
     private String nome;
     private String sobrenome;
     private String email;
+    private BigDecimal saldo;
 }

@@ -7,6 +7,7 @@ import com.messias.finsyn.domain.ports.out.UsuarioRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository {
@@ -33,5 +34,17 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
             JpaUsuarioEntity usuarioEntity = resultado.get();
             return Optional.of(usuarioMapper.jpaUsuarioToDominio(usuarioEntity));
         }
+    }
+
+    @Override
+    public Optional<Usuario> buscarPorId(UUID uuid) {
+        Optional<JpaUsuarioEntity> entity = jpaUsuarioRepository.findById(uuid);
+        return entity.map(usuarioMapper::jpaUsuarioToDominio);
+    }
+
+    @Override
+    public Usuario atualizar(Usuario usuario) {
+        JpaUsuarioEntity entity = usuarioMapper.usuarioToJpaUsuario(usuario);
+        return usuarioMapper.jpaUsuarioToDominio(jpaUsuarioRepository.save(entity));
     }
 }
