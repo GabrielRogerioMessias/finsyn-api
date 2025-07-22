@@ -46,6 +46,15 @@ public class AuthController {
         return ResponseEntity.ok().body(token);
     }
 
+    @Operation(
+            summary = "Salva dasdos do usuário",
+            description = "Registra um novo usuário no sistema a partir dos dados informados",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Usuário registrado com sucesso", content = @Content(schema = @Schema(implementation = UsuarioRespostaDTO.class))),
+                    @ApiResponse(responseCode = "409", description = "Usuário já cadastrado com e-mail informado", content = @Content(schema = @Schema(implementation = StandardError.class))),
+                    @ApiResponse(responseCode = "400", description = "Campos obrigatórios nulos ou em inválidos", content = @Content(schema = @Schema(implementation = StandardError.class)))
+            }
+    )
     @PostMapping("/registrar")
     public ResponseEntity<UsuarioRespostaDTO> register(@RequestBody @Valid UsuarioRegistrarDTO registrarDTO) {
         Usuario usuario = usuarioDTOMapper.usuarioRegistrarDtoToDomain(registrarDTO);
