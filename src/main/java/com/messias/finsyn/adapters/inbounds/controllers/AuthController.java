@@ -3,10 +3,16 @@ package com.messias.finsyn.adapters.inbounds.controllers;
 import com.messias.finsyn.adapters.inbounds.dtos.LoginDataDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRegistrarDTO;
 import com.messias.finsyn.adapters.inbounds.dtos.UsuarioRespostaDTO;
+import com.messias.finsyn.adapters.inbounds.exceptions.StandardError;
 import com.messias.finsyn.adapters.inbounds.mappers.UsuarioDTOMapper;
 import com.messias.finsyn.application.usecases.AuthUseCases;
 import com.messias.finsyn.domain.models.usuario.Usuario;
 import com.messias.finsyn.infrastructure.security.Token;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authenticação", description = "Controlador para registrar e fazer login.")
 public class AuthController {
     private final AuthUseCases authUseCase;
     private final UsuarioDTOMapper usuarioDTOMapper;
@@ -25,6 +32,14 @@ public class AuthController {
         this.usuarioDTOMapper = usuarioDTOMapper;
     }
 
+    @Operation(
+            summary = "Efetuar login",
+            description = "Permite fazer login, e gerar o token JWT",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Login efetuado com sucesso", content = @Content(schema = @Schema(implementation = Token.class))),
+                    @ApiResponse(responseCode = "404", description = "Usuario não encontrado", content = @Content(schema = @Schema(implementation = StandardError.class)))
+            }
+    )
     @PostMapping("/login")
     public ResponseEntity<Token> login(@RequestBody @Valid LoginDataDTO login) {
         Token token = authUseCase.login(login);

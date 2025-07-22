@@ -45,7 +45,7 @@ public class DepositoMetaServiceImpl implements DepositoMetaUseCases {
 
         Transacao transacao = new Transacao();
         transacao.setUsuario(usuario);
-        transacao.setDescricao(depositoMeta.getValor() + " transferido para: " + metaFinanceira.getDescricao());
+        transacao.setDescricao("R$:" + depositoMeta.getValor() + " transferido para: " + metaFinanceira.getDescricao());
         transacao.setTipo(TipoTransacao.TRANSFERENCIA_META);
         transacao.setDataTransacao(depositoMeta.getDataDeposito());
         transacao.setValor(depositoMeta.getValor());
