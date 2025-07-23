@@ -10,8 +10,7 @@ import org.mapstruct.Mapping;
 public interface TransacaoDTOMapper {
     @Mapping(source = "idCategoria", target = "categoria.id")
     Transacao transacaoRegistrarDtoToDomain(TransacaoRegistrarDTO transacaoRegistrarDTO);
-
-    //    @Mapping(target = "usuario.categorias", ignore = true)
-//    @Mapping(target = "categoria.usuario", ignore = true)
+    
+    @Mapping(source = "categoria.descricao", target = "descricaoCategoria")
     TransacaoRespostaDTO domainToTransacaoRespostaDTO(Transacao transacao);
 }
