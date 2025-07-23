@@ -1,4 +1,4 @@
-# 💸 API de Gerenciamento Financeiro Pessoal - em DESENVOLVIMENTO
+# 💸 API de Gerenciamento Financeiro Pessoal
 
 API desenvolvida com **Java 17** e **Spring Boot**, utilizando **padrão de arquitetura hexagonal**, persistência com **MySQL**, controle de versão de banco via **Flyway**, e autenticação segura com **Spring Security + JWT**. Documentação interativa com **Swagger (OpenAPI)**.
 
