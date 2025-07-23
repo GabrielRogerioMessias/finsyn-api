@@ -48,13 +48,13 @@ A aplicação permite ao usuário:
 com.messias.finsyn
 ├── adapters
 │   ├── inbounds         # Entradas (controllers, dtos, mapeadores, exceptions)
-│   └── outbounds        # Saídas (entities, repositories, mapeadores)
+│   └── outbounds        # Saídas (entities-jpa, repositories, mapeadores)
 ├── application
 │   ├── usecases         # Casos de uso (portas de entrada)
 │   ├── services         # Implementações dos casos de uso
 │   └── exceptions       # Exceptions específicas da aplicação
 ├── domain
-│   ├── models           # Modelos da regra de negócio
+│   ├── models           # Modelos da regra de negócio - core da aplicação
 │   └── ports.out        # Portas de saída
 ├── infrastructure
 │   ├── config           # Configurações gerais (Swagger, CORS etc.)
@@ -100,14 +100,14 @@ A autenticação é baseada em **JWT**:
 ### Transações
 - [x] CRUD (Receita e Despesa)
 - [x] Listagem de transações
-- [ ] Filtro por tipo com paginação (pendente)
+- [ ] Filtro por tipo e data com paginação (pendente)
 
 ### Metas Financeiras
 - [x] CRUD de metas
 - [x] Registro de depósitos
 - [x] Listagem e progresso da meta
 - [x] Consulta de depósitos
-- [ ] Saque de valor arrecadado (pendente)
+- [ ] Saque de valor guardado em uma meta financeira (pendente)
 
 ### Outros
 - [x] Consulta de saldo
@@ -116,7 +116,7 @@ A autenticação é baseada em **JWT**:
 - [x] Versionamento do banco com Flyway
 - [ ] Testes unitários (pendente)
 - [ ] Validação de e-mail no cadastro (pendente)
-- [ ] Recuperação de senha (pendente)
+- [ ] Recuperação de senha com validação de e-mail (pendente)
 
 ---
 
