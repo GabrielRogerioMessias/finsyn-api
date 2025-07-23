@@ -34,7 +34,7 @@ public class UsuarioController {
             description = "Atualiza os dados de NOME, SOBRENOME e SALDO do usuário logado no sistema",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Dados do usuário atualizados com sucesso", content = @Content(schema = @Schema(implementation = UsuarioRespostaDTO.class))),
-                    @ApiResponse(responseCode = "400", description = "Campos obrigatórios nulos ou em inválidos", content = @Content(schema = @Schema(implementation = StandardError.class)))
+                    @ApiResponse(responseCode = "400", description = "Campos obrigatórios nulos ou inválidos", content = @Content(schema = @Schema(implementation = StandardError.class)))
             }
     )
     @PutMapping
